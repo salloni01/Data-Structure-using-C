@@ -28,14 +28,14 @@ else
 return 0;
 }
 int main(){
-   //system("cls");
+   system("cls");
     char str[100];
-    printf("Enter string Expression");
+    
     gets(str);
     int result = checkBalanced(str);
     if(result==1)
-    printf("Balanced!!!!");
+    printf("True");
     else
-    printf("Not Balanced!!!");
+    printf("False");
     return 0;
 }
