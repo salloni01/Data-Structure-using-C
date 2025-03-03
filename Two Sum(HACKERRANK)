@@ -1,0 +1,55 @@
+#include <stdio.h>
+
+#include <string.h>
+
+#include <math.h>
+
+#include <stdlib.h>
+
+int main()
+
+{
+
+    int N;
+
+    scanf("%d",&N);
+
+   
+    int arr[N];
+
+    for(int i=0; i<N; i++){
+
+        scanf("%d",&arr[i]);
+
+    }
+
+    int S;
+
+    scanf("%d",&S);
+
+    for(int i=0; i<N; i++){
+
+        for(int j=0; j<N; j++){
+
+            if (i==j){
+                continue;
+                }
+
+               
+
+
+
+            if(arr[i]+arr[j]==S){
+
+                printf("%d %d", i, j);
+
+                return 0;
+
+            }
+
+        }
+
+    }
+
+    return 0;
+}
