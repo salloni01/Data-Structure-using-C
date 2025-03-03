@@ -1,0 +1,28 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Function to find two indices such that their values sum up to the target
+int* twoSum(int* nums, int numsSize, int target, int* returnSize) {
+    int i, j;
+    int* ret_arr = (int*)malloc(2 * sizeof(int));
+    if (ret_arr == NULL) { // Check if memory allocation failed
+        *returnSize = 0;
+        return NULL;
+    }
+
+    // Loop to find the two indices
+    for (i = 0; i < numsSize; i++) {
+        for (j = i + 1; j < numsSize; j++) { // Ensure j > i to avoid same index
+            if (nums[i] + nums[j] == target) {
+                ret_arr[0] = i;
+                ret_arr[1] = j;
+                *returnSize = 2;
+                return ret_arr;
+            }
+        }
+    }
+
+    *returnSize = 0;
+    free(ret_arr); // Free memory if no solution is found
+    return NULL; // Correct pointer return
+}
