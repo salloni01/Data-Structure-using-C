@@ -127,10 +127,11 @@ int evalPreFixExpression(char *exp){
     for(int i=size-1;i>=0;i--){ // iteration from left to right
    char ch= exp[i];
    if(isdigit(ch)){
-      int num=0;
+      int num=0, place=1;
       while(isdigit(exp[i])){ // string mein se number nikalne ka logic
-          num=num/10 + (exp[i]-'0')*10;
-     i--;
+          num=num + (exp[i]-'0')*place;
+          place*=10;
+i--;
    }
       i++;
   operand[++top1]=num;
@@ -162,18 +163,19 @@ int evalPreFixExpression(char *exp){
     return operand[top1--];
   }
 int main(){
+    system("cls");
     char str[100];
-   // printf("Enter Infix Expression: ");
+    printf("Enter Infix Expression: ");
    
-    //gets(str);
-    //int result=evalInfixExpression(str);
-   // printf("Result : %d\n",result);
-    // printf("Enter Postfix Expression: ");
-    // gets(str);
-     //int result1=evalPostFixExpression(str);
+    gets(str);
+    int result=evalInfixExpression(str);
+    printf("Result : %d\n",result);
+     printf("Enter Postfix Expression: ");
+     gets(str);
+     int result1=evalPostFixExpression(str);
    
      
-    // printf("Result : %d\n",result1);
+     printf("Result : %d\n",result1);
      printf("Enter prefix Expression: ");
    
     gets(str);
@@ -181,4 +183,10 @@ int main(){
     printf("Result2 : %d\n",result2);
     return 0;
 }
+  
+     
+
+      
+   
+         
   
