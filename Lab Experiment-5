@@ -53,13 +53,55 @@ str[index++]=ch;
           str[index]='\0'; // to terminate the string
           return str;
     }
-    int main(){
-        system("cls");
+
+char* convertInfixToPrefix(char* exp){
+    int size=strlen(exp),top=-1,index=0;
+    char* str=(char*)malloc(size+1);
+    char stack[size];
+    for(int i=size-1;i>=0;i--){
+        char ch=exp[i];
+        if(isalnum(ch)){
+str[index++]=ch;
+        }
+        else if(ch=='+'||ch=='-'||ch=='*'||ch=='/'||ch=='^'){
+           if(top==-1)
+           stack[++top]=ch;
+           else{
+            while(top!=-1 && precedence (ch)<=precedence(stack[top])){
+                str[index++]=stack[top--];
+            }
+            stack[++top]=ch;
+           }
+        }
+            else if(ch==')'){
+                stack[++top]=ch;
+            }
+            else if(ch=='('){
+                while(stack[top]!=')'){ //jab tak operator stack ke top pe ) na aaye tab tak process repeat karo& jab miljaaye tab process terminate karo &element pop karo
+                   str[index++]=stack[top--]; // index increase , stack decrease
+                   
+                }
+                top--;
+          }
+          }
+          while(top!=-1){
+            str[index++]=stack[top--];
+          }
+          str[index]='\0'; // to terminate the string
+          return strrev(str);
+         
+    }
+        int main(){
+      //  system("cls");
         char exp[100];
         printf("Enter Infix Expression: ");
        
         gets(exp);
         printf("Postfix form of Infix expression %s is %s\n",exp,convertInfixToPostfix(exp));
+         printf("Enter Infix Expression: ");
+       
+        gets(exp);
+        printf("Prefix form of Infix expression %s is %s\n",exp,convertInfixToPrefix(exp));
        
     return 0;
 }
