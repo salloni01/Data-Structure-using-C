@@ -4,6 +4,28 @@ typedef struct node{
     int data;
     struct Node *next;
 }Node;
+Node* head=NULL;//predefined  micro having value 0,now it is a null pointer
+void insertNodeInBeg(int ele){
+Node* newNode=(Node*)malloc(sizeof(Node));//pointer ko memeory de rahe hain issliye pointer mein typecasting ki hai
+newNode->data=ele;//newnode ke data field mein element de diya
+newNode->next=NULL;
+newNode->next=head;
+head=newNode;
+printf("Node Inserted !!!\n");
+}
+void display(){
+   if(head==NULL)
+   printf("List is empty !!!\n");
+   else{
+      printf("Elements are : \n");
+      Node* temp=head;
+      while(temp!=NULL){
+         printf("%d ",temp->data);
+         temp=temp->next;
+      }
+}
+}
+
 int main(){
    system("cls");
     while(1){
@@ -11,20 +33,22 @@ int main(){
         printf("1. Insert Node In Beginning\n");
         printf("2.Insert Node At End\n");
         printf("3.Insert Node At Any Position \n");
-        printf("4. Delete Node In Beginning\n");
-        printf("5. Delete Node At End\n");
+        printf("4. Delete Node From Beginning\n");
+        printf("5. Delete Node From End\n");
         printf("6. Delete Node From Any Position \n");
         printf("7.Search Element In List\n");
         printf("8.Sort Elements\n");
         printf("9. Display List\n");
         printf("10. Exit\n\n");
-         int choice;
+         int choice,value;
         printf("Enter choice: ");
         scanf("%d",&choice);
         switch(choice)
         {
          case 1:
-        
+        printf("Enter value: ");
+        scanf("%d",&value);
+        insertNodeInBeg(value);
          break;
           case 2:
         
@@ -48,7 +72,7 @@ int main(){
         
          break;
          case 9:
-        
+        display();
          break;
          case 10:
         exit(0);
@@ -63,3 +87,4 @@ return 0;
 }
 
     
+         
