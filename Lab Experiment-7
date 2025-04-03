@@ -88,7 +88,7 @@ void deleteNodefromEnd(){
 printf("Node Deleted !!!\n");
 }
 }
-void deleteNodeFromAnyPos(int pos){
+void deleteNodeFromAnyPos(int pos){ // 1 base meaning position and index starts from 1 
    if(head==NULL)
  printf("List is empty !!!\n");
    else if(pos==1){
@@ -105,7 +105,7 @@ void deleteNodeFromAnyPos(int pos){
         Node* t=temp->next;
          temp->next=temp->next->next;
          free(t);
-         printf("Node Deleted !!1\n");
+         printf("Node Deleted !!!\n");
       }
       else
       printf("Invalid Position");
@@ -125,6 +125,21 @@ void search(int target){
       }
       printf("Not Found!!!!\n");
    }
+}
+void sort(){
+   Node* last=NULL;
+   for(Node* i = head; i->next!=NULL;i=i->next){
+      Node* j;// j ki value loop ke bahar leni hai
+      for( j = head; j->next!=last ; j=j->next){
+         if(j->data > j->next->data){
+            int temp=j->data;
+            j->data=j->next->data;
+            j->next->data=temp;
+         }
+      }
+      last=j;
+   }
+   printf("List element sorted Successfully!!!\n");
 }
 void display(){
    if(head==NULL)
@@ -189,10 +204,12 @@ int main(){
         deleteNodeFromAnyPos(pos);
          break;
          case 7:
-         search(target);
+         printf("Enter the searching element");
+            scanf("%d",&target);
+            search(target);
          break;
          case 8:
-        
+        sort();
          break;
          case 9:
         display();
@@ -210,3 +227,4 @@ return 0;
 }
 
     
+   
