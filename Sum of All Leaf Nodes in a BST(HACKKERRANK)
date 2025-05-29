@@ -1,0 +1,38 @@
+#include <stdio.h>
+#define MAX 100
+int tree[MAX];
+void init(){
+for(int i=0;i<MAX;i++){
+tree[i]=-1;
+}
+}
+void insert(int n, int root){
+if(tree[root]==-1)
+
+tree[root]= n;
+ else if(tree[root]<n)
+insert(n,2*root+2);
+else
+insert(n,2*root+1);
+}
+int is( int n,int root){
+if(tree[root]==-1)
+ return 0;
+ else {
+     if(tree[2*root+1]==-1 && tree[2*root+2]==-1)
+ return tree[root];
+ return is(n,2*root+1) + is(n,2*root+2);
+}
+}
+int main() {
+int n,value,s;
+scanf("%d",&n);
+    init();
+for(int i=0;i<n;i++){
+scanf("%d",&value);
+insert(value,0);
+}
+    s=is(value,0);
+    printf("%d",s);
+    return 0;
+}
