@@ -1,0 +1,54 @@
+#include <stdio.h>
+#include<stdlib.h>
+struct node{
+    int data;
+    struct node* prev;
+    struct node* next;
+};
+struct node* head=NULL;
+struct node* create(int ele){
+    struct node* temp=(struct node*)malloc(sizeof(struct node));
+    temp->data=ele;
+    temp->prev=temp->next=NULL;
+    return temp;
+}
+void insert(int ele){
+    struct node* new=create(ele);
+    if(head==NULL)
+    head=new;
+    else{
+        struct node* temp=head;
+    while(temp->next!=NULL){
+       temp= temp->next;
+    }
+        temp->next=new;
+        new->prev=temp;
+    }
+}
+    void search(int target){
+        if(head==NULL)
+            return;
+        else{
+            struct node*temp=head;
+            while(temp!=NULL){
+                if(temp->data==target){
+                    printf("Found\n");
+                return;
+                }
+            temp=temp->next;
+        } 
+        printf("Not Found");
+    }
+    }
+int main(){
+    int n,value;
+    scanf("%d",&n);
+    for(int i=0;i<n;i++){
+        scanf("%d",&value);
+        insert(value);
+    }
+    int target;
+    scanf("%d",&target);
+    search(target);
+    return 0;
+}
