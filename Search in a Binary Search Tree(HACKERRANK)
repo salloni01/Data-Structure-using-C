@@ -1,0 +1,46 @@
+#include <stdio.h>
+#define MAX 100
+int tree[MAX];
+
+#include <stdlib.h>
+void init(){
+for(int i=0;i<MAX;i++){
+ tree[i]=-1;
+}
+}
+void insert(int n,int root){
+if(tree[root]==-1)
+tree[root]=n;
+else if(tree[root]>n)
+insert(n,2*root+1);
+else
+insert(n,2*root+2);
+}
+int search(int i,int target){
+   while(i<MAX && tree[i]!=-1){
+   if(target==tree[i])
+   return i;
+   else if ( target < tree[i])
+i=(2*i+1);
+   else if(target>tree[i])
+ i= (2*i+2);
+   }
+   return -1;
+}
+int main() {
+int index,n,value;
+scanf("%d",&n);
+init();
+for(int i=0;i<n;i++){
+scanf("%d",&value);
+    insert(value,0);
+}
+
+scanf("%d",&value);
+index=search(0,value);
+if(index!=-1)
+printf("Found");
+else
+printf("Not Found"); 
+    return 0;
+}
