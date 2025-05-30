@@ -1,0 +1,66 @@
+#include <stdio.h>
+#include<stdlib.h>
+typedef struct node{
+int data;
+struct node*next;
+}node;
+node*head=NULL;
+node* create(int ele){
+    node* new=(node*)malloc(sizeof(node));
+    new->next=NULL;
+    new->data=ele;
+    return new;
+}
+void insert(int ele){
+    node* new=create(ele);
+    if(head==NULL)
+    head=new;
+    else{
+    node* temp=head;
+  while(temp->next!=NULL){
+    temp=temp->next;
+  }
+  temp->next=new;
+}
+}
+node*delete(node*head){
+    node* slow=head;
+    node* fast=head;
+    node* prev=NULL;
+    while(fast!=NULL && fast->next!=NULL){
+       
+        fast=fast->next->next;
+        prev=slow;
+        slow=slow->next;
+    }
+    prev->next=slow->next;
+    free (slow);
+}
+void display(node*head){
+    if (head==NULL){
+        return;
+    }
+    else{
+        node*temp=head;
+        while(temp!=NULL){
+            printf("%d ",temp->data);
+            temp=temp->next;
+        }
+        
+    }
+}
+int main(){
+    int n,value;
+    printf("enter n");
+    scanf("%d",&n);
+    printf("values are :");
+    for(int i=0;i<n;i++){
+        scanf("%d",&value);
+        insert(value);
+    }
+    printf("output");
+   
+   delete(head);
+   display(head);
+   return 0;
+}
