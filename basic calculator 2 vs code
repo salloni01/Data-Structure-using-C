@@ -1,0 +1,97 @@
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+#include<ctype.h>
+//int main(){
+    int top=-1,top2=-1;
+    int operand[1000];
+   char operator[100];
+    
+    void doprocess(){
+      
+           int x=operand[top--];
+           int y=operand[top--];
+           char op=operator[top2--];
+           int z;
+           switch(op){
+
+           case '+':
+            z=y+x;
+            break;
+              case '-':
+            z=y-x;
+            break;
+  case '*':
+            z=y*x;
+            break;
+          case '/':
+            z=y/x;
+            break;
+             // case '^':
+           // z= pow(y^x);
+           // break;
+           }
+operand[++top]=z;
+        }
+    int prec(char op){
+        switch(op){
+            case '+':
+            case  '-':
+              return 1;
+               case '*':
+            case  '/':
+              return 2;
+              // case '^':
+   //return 3;
+   default:
+              return -1;
+        }
+    }
+    int calculator(char*arr){
+        int n=strlen(arr);
+        for(int i=0;i<n;i++){
+            char ch=arr[i];
+            if(isdigit(ch)){
+                long int num=0;
+                while(isdigit(arr[i])){
+                    num=num*10+arr[i]-48;
+                    i++;
+                }
+                i--;
+                operand[++top]=num;
+            }
+            else if (ch=='+' || ch=='-' || ch=='*' || ch=='/'){
+                if(top2==-1)
+                operator[++top2]=ch;
+                else{
+                    while(top2!=-1 && prec(ch)<=prec(operator[top2]))
+                    doprocess();
+                }
+                operator[++top2]=ch;
+            }
+           
+            else if(ch=='('){
+            operator[++top2]=ch;
+            }
+            else  if(ch==')'){
+           while(operator[top2]!='('){
+           doprocess();
+        }
+        top2--;
+    }
+ }
+        while(top2!=-1){
+            doprocess();
+        }
+    
+    return operand[top];
+    }
+    int main(){
+        char arr[200];
+   printf("enter string");
+        scanf("%s",arr);
+  
+   int ib=calculator(arr);
+   printf("%d",ib);
+    return 0;
+}
